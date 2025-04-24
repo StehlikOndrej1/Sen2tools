@@ -65,7 +65,7 @@ Podrobné kroky viz [SNAP Snappy Installation Guide](https://senbox.atlassian.ne
 Výsledky jsou uloženy ve formátu BEAM-DIMAP.
 
 ## Vývojářská dokumentace
-Aplikace využívá PySide6, geopandas, requests a SNAP API. Je strukturována do hlavních modulů (`main_app.py`, `sentinel2_downloader.py`, `c2rcc_processor.py`). Podporuje vícejazyčné GUI.
+Aplikace využívá PySide6, geopandas, requests a SNAP API. Je strukturována do hlavních modulů (`main_app.py`, `sentinel2_downloader.py`, `c2rcc_processor.py`,`translations.py` ). Podporuje vícejazyčné GUI.
 
 ## Podpora a řešení problémů
 Pro běžné chyby a jejich řešení viz dokumentaci. Případně na email: stehlik.on@seznam.cz
