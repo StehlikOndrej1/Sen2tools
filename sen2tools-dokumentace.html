@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Dokumentace Mapstron - Sen2tools</title>
+    <style>
+        :root {
+            --primary-color: #0066cc;
+            --secondary-color: #4d94ff;
+            --accent-color: #e6f0ff;
+            --border-color: #ddd;
+            --text-color: #333;
+            --code-bg: #f4f4f4;
+            --header-bg: #f9f9f9;
+            --success-color: #4CAF50;
+            --warning-color: #FF9800;
+            --error-color: #F44336;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--header-bg);
+            padding: 20px;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+            color: var(--primary-color);
+        }
+        
+        h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.25em;
+            color: var(--primary-color);
+        }
+        
+        h3 {
+            font-size: 1.5em;
+            margin-top: 1.25em;
+            color: var(--secondary-color);
+        }
+        
+        h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            color: var(--text-color);
+        }
+        
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .nav-container {
+            background: var(--header-bg);
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .nav-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        nav ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        nav ul ul {
+            padding-left: 20px;
+        }
+        
+        nav li {
+            margin: 8px 0;
+        }
+        
+        section {
+            margin-bottom: 40px;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 15px 0;
+        }
+        
+        table, th, td {
+            border: 1px solid var(--border-color);
+        }
+        
+        th {
+            background-color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        
+        tr:hover {
+            background-color: rgba(230, 240, 255, 0.3);
+        }
+        
+        pre {
+            background: var(--code-bg);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+        }
+        
+        code {
+            font-family: Consolas, 'Courier New', monospace;
+        }
+        
+        .alert {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 5px solid var(--secondary-color);
+            background-color: var(--accent-color);
+        }
+        
+        .alert-success {
+            border-left-color: var(--success-color);
+            background-color: rgba(76, 175, 80, 0.1);
+        }
+        
+        .alert-warning {
+            border-left-color: var(--warning-color);
+            background-color: rgba(255, 152, 0, 0.1);
+        }
+        
+        .alert-error {
+            border-left-color: var(--error-color);
+            background-color: rgba(244, 67, 54, 0.1);
+        }
+        
+        .error-table tr td:first-child {
+            font-weight: bold;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+            text-decoration: none;
+        }
+        
+        #backtotop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            opacity: 0.7;
+        }
+        
+        #backtotop:hover {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Mapstron - Sen2tools</h1>
+            <p>Kompletní dokumentace pro hromadné stahování snímků Sentinel-2 a zpracování s C2RCC</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="nav-container">
+            <div class="nav-title">Obsah dokumentace</div>
+            <nav>
+                <ul>
+                    <li><a href="#uvod">1. Úvod a přehled aplikace</a></li>
+                    <li><a href="#instalace">2. Instalace a nastavení prostředí</a>
+                        <ul>
+                            <li><a href="#pozadavky">2.1 Systémové požadavky</a></li>
+                            <li><a href="#instalace-aplikace">2.2 Setup aplikace a knihoven</a></li>
+                            <li><a href="#konfigurace-snap">2.3 Konfigurace SNAP API</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#sentinel-downloader">3. Modul stahování Sentinel-2</a>
+                        <ul>
+                            <li><a href="#sentinel-ui">3.1 Uživatelské rozhraní a komponenty</a></li>
+                            <li><a href="#sentinel-parametry">3.2 Parametry vyhledávání a jejich význam</a></li>
+                            <li><a href="#sentinel-chyby">3.3 Chybové hlášky a řešení problémů</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#c2rcc-processor">4. Modul C2RCC procesoru</a>
+                        <ul>
+                            <li><a href="#c2rcc-ui">4.1 Uživatelské rozhraní a komponenty</a></li>
+                            <li><a href="#c2rcc-parametry">4.2 Parametry zpracování a jejich význam</a></li>
+                            <li><a href="#c2rcc-vystupy">4.3 Výstupní produkty a jejich využití</a></li>
+                            <li><a href="#c2rcc-chyby">4.4 Chybové hlášky a řešení problémů</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#vyvojarska-dokumentace">5. Vývojářská dokumentace</a>
+                        <ul>
+                            <li><a href="#architektura">5.1 Architektura aplikace</a></li>
+                            <li><a href="#localization">5.2 Lokalizace a vícejazyčnost</a></li>
+                            <li><a href="#rozsireni">5.3 Rozšíření aplikace</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#prilohy">6. Přílohy</a>
+                        <ul>
+                            <li><a href="#teorie-c2rcc">6.1 Teoretický základ C2RCC</a></li>
+                            <li><a href="#slovnik">6.2 Slovník pojmů</a></li>
+                            <li><a href="#reference">6.3 Reference a užitečné odkazy</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <section id="uvod">
+            <h2>1. Úvod a přehled aplikace</h2>
+            <p>Aplikace <strong>Mapstron – Sen2tools</strong> je grafické uživatelské rozhraní (GUI) pro komplexní zpracování dat z družic Sentinel-2. Aplikace integruje dva hlavní moduly:</p>
+            
+            <ol>
+                <li><strong>SentinelDownloaderGUI</strong> - umožňuje autentizaci, vyhledávání a stahování produktů Sentinel-2 z platformy Copernicus Data Space Ecosystem</li>
+                <li><strong>C2RCCProcessorGUI</strong> - zpracovává stažené snímky pomocí C2RCC algoritmu v ESA SNAP pro získání vodních kvalitativních parametrů</li>
+            </ol>
+            
+            <p>Aplikace je určena pro:</p>
+            <ul>
+                <li>GIS a DPZ analytiky</li>
+                <li>Výzkumníky monitorující kvalitu povrchových vod</li>
+                <li>Správu povodí</li>
+                <li>Vývojáře, kteří chtějí aplikaci rozšířit</li>
+            </ul>
+            
+            <div class="alert">
+                <p><strong>Poznámka:</strong> Sen2tools vyžaduje připojení k internetu pro stahování dat a platný účet v systému Copernicus Data Space Ecosystem.</p>
+            </div>
+        </section>
+
+        <section id="instalace">
+            <h2>2. Instalace a nastavení prostředí</h2>
+            
+            <section id="pozadavky">
+                <h3>2.1 Systémové požadavky</h3>
+                <p>Před instalací Sen2tools ověřte, že váš systém splňuje následující požadavky:</p>
+                
+                <table>
+                    <thead>
+                        <tr><th>Komponenta</th><th>Požadavek</th><th>Poznámka</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Operační systém</td>
+                            <td>Windows</td>
+                            <td>Testováno na Windows 11</td>
+                        </tr>
+                        <tr>
+                            <td>Python</td>
+                            <td><strong>Python 3.8 až 3.10</strong></td>
+                            <td>SNAP API podporuje pouze Python 3.6-3.10</td>
+                        </tr>
+                        <tr>
+                            <td>Java</td>
+                            <td><strong>Java JDK 11</strong></td>
+                            <td>Vyžadováno pro SNAP Desktop</td>
+                        </tr>
+                        <tr>
+                            <td>ESA SNAP Desktop</td>
+                            <td>Verze 10.0 nebo vyšší</td>
+                            <td>Včetně SNAPPY pluginu</td>
+                        </tr>
+                        <tr>
+                            <td>Úložiště</td>
+                            <td>Minimálně 10 GB volného místa</td>
+                            <td>Pro stažené produkty (1 snímek ≈ 800 MB - 1 GB)</td>
+                        </tr>
+                        <tr>
+                            <td>RAM</td>
+                            <td>Minimálně 16 GB, doporučeno 32+ GB</td>
+                            <td>C2RCC zpracování je náročné na paměť</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="instalace-aplikace">
+                <h3>2.2 Instalace aplikace a knihoven</h3>
+                
+                <h4>Vytvoření virtuálního prostředí</h4>
+                <p>Doporučujeme použít virtuální prostředí pro izolaci závislostí aplikace:</p>
+                
+                <pre><code># Vytvoření virtuálního prostředí
+python -m venv venv
+
+# Aktivace prostředí
+# Pro Windows:
+venv\Scripts\activate
+# Pro Linux/macOS:
+source venv/bin/activate
+
+# Aktualizace pip
+pip install --upgrade pip</code></pre>
+                
+                <h4>Instalace knihoven</h4>
+                <p>Po aktivaci virtuálního prostředí nainstalujte potřebné knihovny:</p>
+                
+                <pre><code>pip install PySide6 requests geopandas shapely esa-snappy jpy</code></pre>
+                
+                <div class="alert alert-warning">
+                    <p><strong>Upozornění:</strong> Pokud nastane problém při instalaci <code>esa-snappy</code> nebo <code>jpy</code>, může být nutné je nainstalovat manuálně po konfiguraci SNAP API (viz následující sekce).</p>
+                </div>
+            </section>
+
+            <section id="konfigurace-snap">
+                <h3>2.3 Konfigurace SNAP API</h3>
+                
+                <h4>Instalace SNAPPY pluginu v SNAP Desktop</h4>
+                Odkaz na dokumentaci k SNAPPY pluginu: <a href="https://senbox.atlassian.net/wiki/spaces/SNAP/pages/3114106881/Installation+and+configuration+of+the+SNAP-Python+esa_snappy+interface+SNAP+version+12" target="_blank">SNAP Snappy Installation Guide</a> 
+                <ol>
+                    <li>Spusťte SNAP Desktop aplikaci</li>
+                    <li>Otevřete <strong>Tools → Plugins</strong></li>
+                    <li>Vyhledejte a nainstalujte <strong>ESA SNAPPY</strong> plugin</li>
+                    <li>Restartujte SNAP Desktop</li>
+                </ol>
+                
+                <h4>Spuštění konfiguračního skriptu</h4>
+                <p>Po instalaci pluginu je potřeba spustit konfigurační skript, který propojí SNAP s vaší Python instalací:</p>
+                
+                <pre><code># Pro Windows (cmd)
+C:\Program Files\esa-snap\bin\snappy-conf.bat C:\cesta\k\python.exe
+
+# Pro Windows (PowerShell)
+& "C:\Program Files\esa-snap\bin\snappy-conf.bat" C:\cesta\k\python.exe
+
+# Pro Linux/macOS
+/path/to/snap/bin/snappy-conf.sh /cesta/k/python</code></pre>
+                
+                <h4>Ověření konfigurace</h4>
+                <p>Po dokončení konfigurace zkontrolujte, že byl vytvořen adresář <code>~/.snap/snap-python</code> obsahující moduly <code>esa_snappy</code> a <code>jpy</code>.</p>
+                
+                <h4>Nastavení proměnných prostředí</h4>
+                <p>Pro správnou funkci je potřeba nastavit tyto proměnné prostředí:</p>
+                
+                <table>
+                    <thead>
+                        <tr><th>Proměnná</th><th>Hodnota</th><th>Příklad</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>SNAP_HOME</td>
+                            <td>Cesta k instalaci SNAP</td>
+                            <td>C:\Program Files\esa-snap</td>
+                        </tr>
+                        <tr>
+                            <td>PYTHONPATH</td>
+                            <td>Přidejte cestu k snap-python</td>
+                            <td>%PYTHONPATH%;C:\Users\uživatel\.snap\snap-python</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h4>Úprava kódu pro import SNAP</h4>
+                <p>V Python kódu je třeba přidat cestu k SNAP API modulům:</p>
+                
+                <pre><code>import sys
+import os
+sys.path.append(os.path.expanduser('~/.snap/snap-python'))</code></pre>
+                
+                <div class="alert alert-success">
+                    <p><strong>Tip:</strong> Pro ověření správné instalace spusťte v Pythonu následující kód:</p>
+                    <pre><code>from esa_snappy import ProductIO
+print("SNAP API úspěšně nakonfigurován!")</code></pre>
+                </div>
+            </section>
+        </section>
+
+        <section id="sentinel-downloader">
+            <h2>3. Modul stahování Sentinel-2</h2>
+            
+            <section id="sentinel-ui">
+                <h3>3.1 Uživatelské rozhraní a komponenty</h3>
+                
+                <p>Modul <strong>SentinelDownloaderGUI</strong> poskytuje rozhraní pro autentizaci, vyhledávání a stahování snímků Sentinel-2 přímo z Copernicus Data Space Ecosystem.</p>
+                
+                <h4>Hlavní komponenty rozhraní:</h4>
+                <ol>
+                    <li><strong>Přihlašovací sekce</strong> - pole pro zadání přihlašovacích údajů Copernicus Data Space Ecosystem</li>
+                    <li><strong>Sekce parametrů</strong> - nastavení pro vyhledávání snímků (deaktivováno do úspěšného přihlášení)</li>
+                    <li><strong>Logovací oblast</strong> - zobrazuje průběh operací a informační zprávy</li>
+                </ol>
+                
+                <h4>Postup použití:</h4>
+                <ol>
+                    <li>Zadejte přihlašovací údaje a klikněte na "Přihlásit se"</li>
+                    <li>Po úspěšném přihlášení vyplňte parametry vyhledávání (časové období, oblačnost, oblast zájmu)</li>
+                    <li>Klikněte na "Vyhledat snímky" pro vyhledání odpovídajících produktů</li>
+                    <li>Po nalezení snímků se aktivuje tlačítko "Stáhnout nalezené snímky"</li>
+                    <li>Kliknutím na toto tlačítko zahájíte stahování vybraných produktů do cílové složky</li>
+                </ol>
+            </section>
+
+            <section id="sentinel-parametry">
+                <h3>3.2 Parametry vyhledávání a jejich význam</h3>
+                
+                <table>
+                    <thead>
+                        <tr><th>Parametr</th><th>Popis</th><th>Formát/Omezení</th><th>Použití v API</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Username</td>
+                            <td>Uživatelské jméno pro Copernicus Data Space</td>
+                            <td>E-mailová adresa</td>
+                            <td>Autentizace pomocí OAuth2</td>
+                        </tr>
+                        <tr>
+                            <td>Password</td>
+                            <td>Heslo pro Copernicus Data Space</td>
+                            <td>Min. 8 znaků</td>
+                            <td>Autentizace pomocí OAuth2</td>
+                        </tr>
+                        <tr>
+                            <td>Shapefile</td>
+                            <td>Oblast zájmu ve formátu ESRI Shapefile</td>
+                            <td>.shp soubor (+ .dbf, .shx)</td>
+                            <td>Konvertován na WKT a použit v parametru <code>area</code></td>
+                        </tr>
+                        <tr>
+                            <td>Date From</td>
+                            <td>Počáteční datum pro vyhledávání</td>
+                            <td>YYYY-MM-DD (nesmí být v budoucnosti)</td>
+                            <td>Filtr <code>ContentDate/Start gt {date_from}T00:00:00.000Z</code></td>
+                        </tr>
+                        <tr>
+                            <td>Date To</td>
+                            <td>Koncové datum pro vyhledávání</td>
+                            <td>YYYY-MM-DD (nesmí být v budoucnosti)</td>
+                            <td>Filtr <code>ContentDate/Start lt {date_to}T00:00:00.000Z</code></td>
+                        </tr>
+                        <tr>
+                            <td>Save Folder</td>
+                            <td>Adresář pro ukládání stažených dat</td>
+                            <td>Existující zapisovatelný adresář</td>
+                            <td>Lokální cesta pro uložení stažených souborů</td>
+                        </tr>
+                        <tr>
+                            <td>Cloud Cover</td>
+                            <td>Maximální povolená oblačnost</td>
+                            <td>0-100 (%)</td>
+                            <td>Filtr <code>att/Name eq 'cloudCover' and att/Value lt {cloud_cover}</code></td>
+                        </tr>
+                        <tr>
+                            <td>Product Type</td>
+                            <td>Úroveň produktu Sentinel-2</td>
+                            <td>Level-1C nebo Level-2A</td>
+                            <td>Filtr <code>att/Name eq 'productType' and att/Value eq '{product_type_code}'</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="alert">
+                    <p><strong>Poznámka k produktům:</strong></p>
+                    <ul>
+                        <li><strong>Level-1C</strong> (S2MSI1C) - ortorektifikované produkty v TOA reflektanci</li>
+                        <li><strong>Level-2A</strong> (S2MSI2A) - ortorektifikované produkty s atmosférickou korekcí (BOA reflektance)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="sentinel-chyby">
+                <h3>3.3 Chybové hlášky a řešení problémů</h3>
+                
+                <table class="error-table">
+                    <thead>
+                        <tr><th>Chybová hláška</th><th>Kontext výskytu</th><th>Pravděpodobná příčina</th><th>Řešení</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>"Login error"</td>
+                            <td>Při pokusu o přihlášení</td>
+                            <td>Nesprávné přihlašovací údaje nebo výpadek služby</td>
+                            <td>Ověřte přihlašovací údaje, zkontrolujte připojení k internetu, nebo zkuste později</td>
+                        </tr>
+                        <tr>
+                            <td>"Neplatný formát datumu v poli {label}. Očekává se YYYY-MM-DD."</td>
+                            <td>Při validaci vstupních parametrů</td>
+                            <td>Datum není ve formátu YYYY-MM-DD</td>
+                            <td>Opravte formát data na YYYY-MM-DD (např. 2023-05-15)</td>
+                        </tr>
+                        <tr>
+                            <td>"Datum v poli {label} nesmí být v budoucnosti."</td>
+                            <td>Při validaci vstupních parametrů</td>
+                            <td>Zadané datum je v budoucnosti</td>
+                            <td>Zadejte datum v minulosti nebo současnosti</td>
+                        </tr>
+                        <tr>
+                            <td>"Datum 'Od' nemůže být pozdější než datum 'Do'."</td>
+                            <td>Při validaci vstupních parametrů</td>
+                            <td>Počáteční datum je pozdější než koncové</td>
+                            <td>Opravte datumy tak, aby počáteční datum bylo dříve než koncové</td>
+                        </tr>
+                        <tr>
+                            <td>"Hodnota oblačnosti musí být mezi 0 a 100."</td>
+                            <td>Při validaci vstupních parametrů</td>
+                            <td>Procento oblačnosti mimo povolený rozsah</td>
+                            <td>Zadejte hodnotu mezi 0 a 100</td>
+                        </tr>
+                        <tr>
+                            <td>"Hodnota oblačnosti není platné číslo."</td>
+                            <td>Při validaci vstupních parametrů</td>
+                            <td>Zadaná hodnota není číslo</td>
+                            <td>Zadejte číselnou hodnotu (např. "20" nebo "20.5")</td>
+                        </tr>
+                        <tr>
+                            <td>"Neplatný shapefile."</td>
+                            <td>Při validaci vstupních parametrů</td>
+                            <td>Shapefile nebyl zadán nebo neexistuje</td>
+                            <td>Vyberte platný .shp soubor pomocí tlačítka "Vybrat"</td>
+                        </tr>
+                        <tr>
+                            <td>"Neplatná výstupní složka."</td>
+                            <td>Při validaci vstupních parametrů</td>
+                            <td>Cílová složka nebyla zadána nebo neexistuje</td>
+                            <td>Vyberte existující zapisovatelnou složku</td>
+                        </tr>
+                        <tr>
+                            <td>"No products found for given parameters."</td>
+                            <td>Po dokončení vyhledávání</td>
+                            <td>Žádné produkty nevyhovují zadaným parametrům</td>
+                            <td>Upravte parametry vyhledávání (rozšiřte časové období, zvyšte max. oblačnost)</td>
+                        </tr>
+                        <tr>
+                            <td>"Chyba při vyhledávání: {ex}"</td>
+                            <td>Během procesu vyhledávání</td>
+                            <td>Síťová chyba, chyba API nebo neočekávaná výjimka</td>
+                            <td>Zkontrolujte připojení, platnost tokenu, případně restartujte aplikaci</td>
+                        </tr>
+                        <tr>
+                            <td>"Nejsou k dispozici žádné produkty ke stažení."</td>
+                            <td>Při pokusu o stažení bez předchozího vyhledávání</td>
+                            <td>Uživatel klikl na stažení před vyhledáním</td>
+                            <td>Nejprve proveďte vyhledávání pomocí tlačítka "Vyhledat snímky"</td>
+                        </tr>
+                        <tr>
+                            <td>"Chyba při stahování {product['Name']}: {e}"</td>
+                            <td>Během procesu stahování</td>
+                            <td>Síťová chyba, nedostatek místa na disku</td>
+                            <td>Zkontrolujte připojení, volné místo, oprávnění k zápisu</td>
+                        </tr>
+                        <tr>
+                            <td>"Neočekávaná chyba při stahování: {ex}"</td>
+                            <td>Při stahování dat</td>
+                            <td>Obecná neošetřená výjimka</td>
+                            <td>Zkontrolujte logy pro detaily, restartujte aplikaci</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                
+
+                            <section id="c2rcc-processor">
+                                <h2>4. Modul C2RCC procesoru</h2>
+                                
+                                <section id="c2rcc-ui">
+                                    <h3>4.1 Uživatelské rozhraní a komponenty</h3>
+                                    
+                                    <p>Modul <strong>C2RCCProcessorGUI</strong> provádí zpracování snímků Sentinel-2 pomocí C2RCC algoritmu v ESA SNAP pro získání vodních kvalitativních parametrů.</p>
+                                    
+                                    <h4>Hlavní komponenty rozhraní:</h4>
+                                    <ol>
+                                        <li><strong>Vstupní parametry</strong> - cesta ke vstupní složce s .SAFE soubory <strong>(S2L1C)</strong>, výstupní složka a volitelný shapefile pro ořez</li>
+                                        <li><strong>Výstupní volby</strong> - výběr typů výstupních produktů C2RCC</li>
+                                        <li><strong>Logovací oblast</strong> - zobrazuje průběh zpracování a informační zprávy</li>
+                                        <li><strong>Tlačítko spuštění</strong> - spouští proces zpracování</li>
+                                    </ol>
+                                    
+                                    <h4>Postup použití:</h4>
+                                    <ol>
+                                        <li>Zadejte cestu ke složce obsahující .SAFE soubory Sentinel-2</li>
+                                        <li>Zadejte výstupní složku pro výsledky</li>
+                                        <li>Volitelně vyberte shapefile pro ořez výsledků</li>
+                                        <li>Zaškrtněte požadované výstupní produkty</li>
+                                        <li>Klikněte na "🚀 Spustit zpracování"</li>
+                                        <li>Průběh zpracování můžete sledovat v logovací oblasti</li>
+                                    </ol>
+                                </section>
+                        
+                                <section id="c2rcc-parametry">
+                                    <h3>4.2 Parametry zpracování a jejich význam</h3>
+                                    
+                                    <table>
+                                        <thead>
+                                            <tr><th>Parametr</th><th>Popis</th><th>Formát/Omezení</th><th>Výchozí hodnota</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Vstupní složka</td>
+                                                <td>Cesta ke složce obsahující produkty Sentinel-2 ve formátu .SAFE</td>
+                                                <td>Existující složka s alespoň jedním .SAFE souborem</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Výstupní složka</td>
+                                                <td>Cílová složka pro ukládání výsledků</td>
+                                                <td>Existující zapisovatelná složka</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Shapefile</td>
+                                                <td>Oblast zájmu ve formátu ESRI Shapefile (volitelné)</td>
+                                                <td>.shp soubor (+ .dbf, .shx)</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Salinita</td>
+                                                <td>Hodnota salinity pro C2RCC model</td>
+                                                <td>Číslo (PSU)</td>
+                                                <td>35.0</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Teplota</td>
+                                                <td>Teplota vody pro C2RCC model</td>
+                                                <td>Číslo (°C)</td>
+                                                <td>15.0</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ozon</td>
+                                                <td>Koncentrace ozonu</td>
+                                                <td>Číslo (DU)</td>
+                                                <td>330</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tlak</td>
+                                                <td>Atmosférický tlak</td>
+                                                <td>Číslo (hPa)</td>
+                                                <td>1013</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    
+                                    <h4>Výstupní produkty:</h4>
+                                    <table>
+                                        <thead>
+                                            <tr><th>Produkt</th><th>Popis</th><th>Doporučení</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Rrs</td>
+                                                <td>tady bude popis</td>
+                                                <td>Základní produkt pro analýzu vod</td>
+                                            </tr>
+                                            <tr>
+                                                <td>AC reflectance</td>
+                                                <td>tady bude popis</td>
+                                                <td>Doporučeno pro většinu aplikací</td>
+                                            </tr>
+                                            <tr>
+                                                <td>IOP</td>
+                                                <td>Inherentní optické vlastnosti</td>
+                                                <td>Pro pokročilé analýzy</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Bio-IOP</td>
+                                                <td>Biologické inherentní optické vlastnosti</td>
+                                                <td>Pro analýzu fytoplanktonu</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Kd</td>
+                                                <td>tady bude popis</td>
+                                                <td>Pro analýzu průhlednosti vody</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Uncertainty</td>
+                                                <td>Nejistoty výstupních produktů</td>
+                                                <td>Pro kvalitativní analýzu</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Total concentrations</td>
+                                                <td>Celkové koncentrace látek ve vodě</td>
+                                                <td>Pro kvantitativní analýzu</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </section>
+                        
+                                <section id="c2rcc-vystupy">
+                                    <h3>4.3 Výstupní produkty a jejich využití</h3>
+                                    
+                                    <p>C2RCC procesor generuje následující výstupní produkty:</p>
+                                    
+                                    <!--<ul>
+                                        <li><strong>Rrs</strong> - Vzdáleně měřená reflektance pod hladinou (Remote sensing reflectance) je základním produktem pro analýzu vodních ploch</li>
+                                        <li><strong>AC reflectance</strong> - Atmosféricky korigovaná reflektance (Atmospherically Corrected reflectance) vhodná pro většinu aplikací</li>
+                                        <li><strong>IOP</strong> - Inherentní optické vlastnosti (Inherent Optical Properties) popisující šíření světla ve vodě</li>
+                                        <li><strong>Bio-IOP</strong> - Biologické inherentní optické vlastnosti specifické pro fytoplankton</li>
+                                        <li><strong>Kd</strong> - Koeficient útlumu světla ve vodě (Diffuse attenuation coefficient) indikující průhlednost vody</li>
+                                        <li><strong>Uncertainty</strong> - Mapy nejistot výstupních produktů pro hodnocení kvality výsledků</li>
+                                        <li><strong>Total concentrations</strong> - Odhady celkových koncentrací látek ve vodě</li>
+                                    </ul>-->
+                                    
+                                    <p>Výstupy jsou uloženy ve formátu BEAM-DIMAP (soubory .dim a příslušné datové soubory) v podadresářích pojmenovaných podle vstupních .SAFE souborů s příponou _C2RCC.</p>
+                                    
+                                    <div class="alert">
+                                        <p><strong>Poznámka:</strong> Pro zpracování velkých oblastí nebo časových řad může být výpočetně náročné. Doporučujeme dostatečné systémové prostředky (viz kapitola 2.1).</p>
+                                    </div>
+                                </section>
+                        
+                                <section id="c2rcc-chyby">
+                                    <h3>4.4 Chybové hlášky a řešení problémů</h3>
+                                    
+                                    <table class="error-table">
+                                        <thead>
+                                            <tr><th>Chybová hláška</th><th>Kontext výskytu</th><th>Pravděpodobná příčina</th><th>Řešení</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>"Invalid input folder."</td>
+                                                <td>Při spuštění zpracování</td>
+                                                <td>Vstupní složka neexistuje nebo neobsahuje .SAFE soubory</td>
+                                                <td>Ověřte cestu a obsah vstupní složky</td>
+                                            </tr>
+                                            <tr>
+                                                <td>"SNAP inicializace selhala"</td>
+                                                <td>Při spuštění zpracování</td>
+                                                <td>Problém s konfigurací SNAP API</td>
+                                                <td>Ověřte instalaci SNAP a SNAPPY (viz kapitola 2.3)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>"Chyba při čtení produktu"</td>
+                                                <td>Během zpracování</td>
+                                                <td>Poškozený nebo nekompatibilní .SAFE soubor</td>
+                                                <td>Ověřte integritu souboru, případně stáhněte znovu</td>
+                                            </tr>
+                                            <tr>
+                                                <td>"Chyba při zápisu výstupu"</td>
+                                                <td>Během ukládání výsledků</td>
+                                                <td>Problém s oprávněním k zápisu nebo místem na disku</td>
+                                                <td>Ověřte oprávnění a volné místo v cílové složce</td>
+                                            </tr>
+                                            <tr>
+                                                <td>"Shapefile nelze načíst"</td>
+                                                <td>Při ořezu podle shapefile</td>
+                                                <td>Neplatný nebo poškozený shapefile</td>
+                                                <td>Ověřte formát a obsah shapefile</td>
+                                            </tr>
+                                            <tr>
+                                                <td>"Nedostatek paměti"</td>
+                                                <td>Během zpracování</td>
+                                                <td>Nedostatek systémových prostředků</td>
+                                                <td>Zkuste zpracovat menší oblast nebo zvýšit přidělenou paměť</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    
+                                    <div class="alert alert-success">
+                                        <h4>Informační hlášky:</h4>
+                                        <ul>
+                                            <li><strong>"SNAP inicializace dokončena."</strong> - SNAP API bylo úspěšně načteno</li>
+                                            <li><strong>"Hotovo: {cesta}"</strong> - Úspěšné dokončení zpracování pro daný produkt</li>
+                                            <li><strong>"Zpracování dokončeno."</strong> - Všechny produkty byly úspěšně zpracovány</li>
+                                        </ul>
+                                    </div>
+                                </section>
+                            </section>
+                        
+                            <section id="vyvojarska-dokumentace">
+                                <h2>5. Vývojářská dokumentace</h2>
+                                
+                                <section id="architektura">
+                                    <h3>5.1 Architektura aplikace</h3>
+                                    
+                                    <p>Aplikace je postavena na těchto hlavních komponentách:</p>
+                                    
+                                    <h4>Hlavní moduly:</h4>
+                                    <ul>
+                                        <li><strong>main_app.py</strong> - Hlavní okno aplikace s tab widgetem a lokalizací</li>
+                                        <li><strong>sentinel2_downloader.py</strong> - Modul pro stahování dat Sentinel-2</li>
+                                        <li><strong>c2rcc_processor.py</strong> - Modul pro zpracování dat pomocí C2RCC</li>
+                                        <li><strong>translations.py</strong> - Vícejazyčné překlady rozhraní</li>
+                                    </ul>
+                                    
+                                    <h4>Klíčové třídy:</h4>
+                                    <ul>
+                                        <li><strong>MainApp</strong> - Hlavní okno aplikace s tab widgetem</li>
+                                        <li><strong>SentinelDownloaderGUI</strong> - GUI pro stahování Sentinel-2 dat</li>
+                                        <li><strong>C2RCCProcessorGUI</strong> - GUI pro C2RCC zpracování</li>
+                                        <li><strong>Communicate/C2RCCSignals</strong> - Pomocné třídy pro signalizaci mezi vlákny</li>
+                                    </ul>
+                                    
+                                    <h4>Knihovny:</h4>
+                                    <ul>
+                                        <li><strong>PySide6</strong> - GUI framework</li>
+                                        <li><strong>requests</strong> - HTTP komunikace s Copernicus API</li>
+                                        <li><strong>geopandas/shapely</strong> - Práce s geometrií</li>
+                                        <li><strong>esa-snappy/jpy</strong> - Rozhraní k SNAP API</li>
+                                    </ul>
+                                    
+                                    <div class="alert">
+                                        <p><strong>Poznámka:</strong> Aplikace používá multithreading pro neblokující GUI během stahování a zpracování dat.</p>
+                                    </div>
+                                </section>
+                        
+                                <section id="localization">
+                                    <h3>5.2 Lokalizace a vícejazyčnost</h3>
+                                    
+                                    <p>Aplikace podporuje vícejazyčné rozhraní pomocí slovníku překladů v <code>translations.py</code>.</p>
+                                    
+                                    <h4>Implementace lokalizace:</h4>
+                                    <ol>
+                                        <li>Všechny texty v GUI jsou uloženy ve slovníku překladů</li>
+                                        <li>Při změně jazyka je volána metoda <code>update_translations()</code></li>
+                                        <li>Každá GUI komponenta aktualizuje své texty podle aktuálního jazyka</li>
+                                    </ol>
+                                    
+                                    <h4>Přidání nového jazyka:</h4>
+                                    <ol>
+                                        <li>Přidejte nový klíč do slovníku v <code>translations.py</code></li>
+                                        <li>Pro každý textový klíč přidejte překlad</li>
+                                        <li>Přidejte tlačítko pro výběr jazyka v <code>MainApp</code></li>
+                                    </ol>
+                                    
+                                    <pre><code># Příklad přidání němčiny
+                        translations["de"] = {
+                            "app_title": "🛰️ Mapstron - Sen2tools",
+                            "download_tab": "📥 Sentinel-2 herunterladen",
+                            # ... další překlady
+                        }</code></pre>
+                                    
+                                    <div class="alert alert-success">
+                                        <p><strong>Tip:</strong> Pro konzistentní překlady používejte stejné klíče ve všech jazykových verzích.</p>
+                                    </div>
+                                </section>
+                        
+                               <!-- <section id="rozsireni">
+                                    <h3>5.3 Rozšíření aplikace</h3>
+                                    
+                                    <p>Aplikaci lze rozšířit o nové funkce několika způsoby:</p>
+                                    
+                                    <h4>1. Přidání nových procesních algoritmů</h4>
+                                    <p>V modulu <code>c2rcc_processor.py</code> lze přidat další SNAP operátory:</p>
+                                    <ol>
+                                        <li>Definujte nové parametry v GUI</li>
+                                        <li>Vytvořte HashMap s parametry pro operátor</li>
+                                        <li>Voláním <code>GPF.createProduct()</code> spusťte operátor</li>
+                                    </ol>
+                                    
+                                    <h4>2. Rozšíření stahovacího modulu</h4>
+                                    <p>V <code>sentinel2_downloader.py</code> lze přidat:</p>
+                                    <ul>
+                                        <li>Další filtry pro vyhledávání produktů</li>
+                                        <li>Podporu pro další družicové mise</li>
+                                        <li>Pokročilé možnosti stahování (paralelní stahování, obnovení přerušeného stahování)</li>
+                                    </ul>
+                                    
+                                    <h4>3. Integrace s dalšími nástroji</h4>
+                                    <p>Aplikaci lze propojit s:</p>
+                                    <ul>
+                                        <li>QGIS pomocí Python pluginu</li>
+                                        <li>Databázemi pro ukládání metadat</li>
+                                        <li>Webovými službami pro vizualizaci výsledků</li>
+                                    </ul>
+                                    
+                                    <div class="alert alert-warning">
+                                        <p><strong>Upozornění:</strong> Při rozšiřování aplikace dbejte na zachování vícejazyčnosti a oddělení GUI logiky od zpracování dat.</p>
+                                    </div>
+                                </section>
+                            </section>-->
+                        
+                            <section id="prilohy">
+                                <h2>6. Přílohy</h2>
+                                
+                                <section id="teorie-c2rcc">
+                                    <h3>6.1 Teoretický základ C2RCC</h3>
+                                    
+                                    <p>C2RCC (Case 2 Regional Coast Colour) je algoritmus pro odvod vodních kvalitativních parametrů z družicových dat. Klíčové aspekty:</p>
+                                    
+                                    <h4>Vstupní požadavky:</h4>
+                                    <ul>
+                                        <li>Snímky Sentinel-2 Level-1C (TOA)</li>
+                                        <li>Geometrické a radiometrické parametry snímku</li>
+                                        <li>Pomocné meteorologické údaje</li>
+                                    </ul>
+                                    
+                                    <h4>Výstupní produkty:</h4>
+                                    <ul>
+                                        <li>Koncentrace chlorofylu-a</li>
+                                        <li>Celkový obsah suspendovaných látek</li>
+                                        <li>Žluté substance (CDOM)</li>
+                                        <li>Optické vlastnosti vody</li>
+                                    </ul>
+                                    
+                                    <h4>Omezení:</h4>
+                                    <ul>
+                                        <li>Optimalizováno pro pobřežní a vnitrozemské vody</li>
+                                        <li>Vyžaduje kalibraci pro specifické regiony</li>
+                                        <li>Přesnost závisí na kvalitě vstupních dat</li>
+                                    </ul>
+                                </section>
+                        
+                                <section id="slovnik">
+                                    <h3>6.2 Slovník pojmů</h3>
+                                    
+                                    <table>
+                                        <thead>
+                                            <tr><th>Termín</th><th>Význam</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>.SAFE</td>
+                                                <td>Formát archivu Sentinel (Standard Archive Format for Europe)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>BEAM-DIMAP</td>
+                                                <td>Formát produktů SNAP (metadata v XML + binární data)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>BOA</td>
+                                                <td>Bottom-of-Atmosphere (odrazivost na hladině)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>C2RCC</td>
+                                                <td>Case 2 Regional Coast Colour - algoritmus pro vodní parametry</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CDSE</td>
+                                                <td>Copernicus Data Space Ecosystem</td>
+                                            </tr>
+                                            <tr>
+                                                <td>IOP</td>
+                                                <td>Inherent Optical Properties - inherentní optické vlastnosti</td>
+                                            </tr>
+                                            <tr>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td>SNAP</td>
+                                                <td>ESA Sentinel Application Platform</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TOA</td>
+                                                <td>Top-of-Atmosphere (odrazivost na vrcholu atmosféry)</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </section>
+                        
+                                <section id="reference">
+                                    <h3>6.3 Reference a užitečné odkazy</h3>
+                                    
+                                    <h4>Užitečné odkazy:</h4>
+                                    <ul>
+                                        <li><a href="https://sentinels.copernicus.eu/web/sentinel/user-guides/sentinel-2-msi" target="_blank">Uživatelská příručka Sentinel-2</a></li>
+                                        <li><a href="https://step.esa.int/main/doc/tutorials/" target="_blank">SNAP Tutorials</a></li>
+                                        <li><a href="https://forum.step.esa.int/" target="_blank">SNAP Fórum</a></li>
+                                        <li><a href="https://dataspace.copernicus.eu/" target="_blank">Copernicus Data Space Ecosystem</a></li>
+                                    </ul>
+                                    
+                                    <h4>Vědecké publikace:</h4>
+                                    <ul>
+                                        <li>Schiller, Helmut; Doerffer, Roland (1999). Neural network for emulation of an inverse model operational derivation of Case II water properties from MERIS data, International Journal of Remote Sensing, 20:9, 1735-1746, https://doi.org/10.1080/014311699212443</li>
+                                        <li>Brockmann, Carsten; Doerffer, Roland; Peters, Marco; Kerstin, Stelzer; Embacher, Sabine; Ruescas, Ana (2016). Evolution of the C2RCC Neural Network for Sentinel 2 and 3 for the Retrieval of Ocean Colour Products in Normal and Extreme Optically Complex Waters. Living Planet Symposium, Proceedings of the conference held 9-13 May 2016 in Prague, Czech Republic. Edited by L. Ouwehand. ESA-SP Volume 740, ISBN: 978-92-9221-305-3, p.54</li>
+                                    </ul>
+                                    
+                    
+                                </section>
+                            </section>
+                        
+                            <a href="#" id="backtotop">↑ Na začátek</a>
+                        
+                            <script>
+                                // Simple back to top button
+                                document.getElementById('backtotop').addEventListener('click', function(e) {
+                                    e.preventDefault();
+                                    window.scrollTo({top: 0, behavior: 'smooth'});
+                                });
+                        
+                                // Show/hide button based on scroll position
+                                window.addEventListener('scroll', function() {
+                                    var btn = document.getElementById('backtotop');
+                                    if (window.pageYOffset > 300) {
+                                        btn.style.display = 'block';
+                                    } else {
+                                        btn.style.display = 'none';
+                                    }
+                                });
+                            </script>
+                        </body>
+                        </html>
